@@ -1,4 +1,4 @@
-package com.sparta.ja;
+package com.sparta.ja.controller;
 
 import static org.junit.Assert.assertTrue;
 
