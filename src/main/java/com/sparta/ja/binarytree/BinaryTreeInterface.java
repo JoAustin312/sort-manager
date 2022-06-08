@@ -1,4 +1,7 @@
-package com.sparta.ja.model;
+package com.sparta.ja.binarytree;
+
+import com.sparta.ja.exceptions.ChildNotFoundException;
+import com.sparta.ja.exceptions.NodeNotFoundException;
 
 public interface BinaryTreeInterface {
 
@@ -12,9 +15,9 @@ public interface BinaryTreeInterface {
 
         boolean findElement(int value);
 
-        int getLeftChild(int element); //throws ChildNotFoundException;
+        int getLeftChild(int element) throws ChildNotFoundException;
 
-        int getRightChild(int element); //throws ChildNotFoundException;
+        int getRightChild(int element) throws ChildNotFoundException, NodeNotFoundException;
 
         int[] getSortedTreeAsc();
 

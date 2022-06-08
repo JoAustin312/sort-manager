@@ -1,4 +1,4 @@
-package com.sparta.ja.model;
+package com.sparta.ja.binarytree;
 
 public class Node {
 
