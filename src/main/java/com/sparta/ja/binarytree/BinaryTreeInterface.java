@@ -15,7 +15,7 @@ public interface BinaryTreeInterface {
 
         boolean findElement(int value);
 
-        int getLeftChild(int element) throws ChildNotFoundException;
+        int getLeftChild(int element) throws ChildNotFoundException, NodeNotFoundException;
 
         int getRightChild(int element) throws ChildNotFoundException, NodeNotFoundException;
 

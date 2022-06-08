@@ -4,9 +4,12 @@ import com.sparta.ja.exceptions.ChildNotFoundException;
 import com.sparta.ja.exceptions.NodeNotFoundException;
 import com.sparta.ja.logging.CustomFormatter;
 import com.sparta.ja.sorters.BubbleSorter;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -16,6 +19,7 @@ public class BinaryTree implements BinaryTreeInterface {
 
     private final Node rootNode;
     private static Logger logger = Logger.getLogger("my logger");
+    private int[] sortedElements;
 
     public BinaryTree(final int element) {
         rootNode = new Node(element);
@@ -35,7 +39,7 @@ public class BinaryTree implements BinaryTreeInterface {
     }
 
     private void addNodeToTree(Node node, int element){
-        if (element < node.getValue()){
+        if (element <= node.getValue()){
             if (!node.hasLeftChild()){
                 Node leftChild = new Node(element);
                 node.setLeftChild(leftChild);
@@ -104,14 +108,14 @@ public class BinaryTree implements BinaryTreeInterface {
     }
 
     @Override
-    public int getLeftChild(int element) throws ChildNotFoundException {
+    public int getLeftChild(int element) throws ChildNotFoundException, NodeNotFoundException {
         if (findElement(element)) {
             Node node = findNode(element);
             if (node.hasLeftChild()) {
                 Node leftChild = getLeftChild(node);
                 return leftChild.getValue();
             } else throw new ChildNotFoundException("Child not found");
-        } else throw new ChildNotFoundException("Node not found");
+        } else throw new NodeNotFoundException("Node not found");
     }
 
     private Node getLeftChild(Node node){
@@ -139,25 +143,39 @@ public class BinaryTree implements BinaryTreeInterface {
 
     @Override
     public int[] getSortedTreeAsc() {
-        int[] elementsArray = getSortedTreeAsc(rootNode).stream().mapToInt(i -> i).toArray();
-        BubbleSorter.bubbleSortVoid(elementsArray);
-        return elementsArray;
+        sortedElements = new int[0];
+        getSortedTree(rootNode);
+        BubbleSorter.bubbleSortVoid(sortedElements);
+        return sortedElements;
     }
 
-    private ArrayList<Integer> getSortedTreeAsc(Node node) {
+    private int[] getSortedTree(Node node) {
         if (node == null){
-            return new ArrayList<>();
+            return new int[0];
         }
-        ArrayList<Integer> elements = new ArrayList<>();
-        elements.add(node.getValue());
-        elements.addAll(getSortedTreeAsc(node.getLeftChild()));
-        elements.addAll(getSortedTreeAsc(node.getRightChild()));
-
-        return elements;
+        if (node.hasLeftChild()){
+            getSortedTree(node.getLeftChild());
+        }
+        sortedElements = appendToArray(sortedElements, node.getValue());
+        if (node.hasRightChild()) {
+            getSortedTree(node.getRightChild());
+        }
+        return sortedElements;
     }
 
     @Override
     public int[] getSortedTreeDesc() {
-        return new int[0];
+        sortedElements = new int[0];
+        getSortedTree(rootNode);
+        BubbleSorter.bubbleSortVoid(sortedElements);
+        ArrayUtils.reverse(sortedElements);
+        return sortedElements;
+    }
+
+    private int[] appendToArray(int[] arr, int numToAppend){
+        int[] result = new int[arr.length + 1];
+        System.arraycopy(arr, 0, result, 0, arr.length);
+        result[result.length - 1] = numToAppend;
+        return result;
     }
 }
