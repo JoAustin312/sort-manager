@@ -1,18 +1,15 @@
 package com.sparta.ja.sorters;
 
-public class BubbleSorter {
+public class BubbleSorter implements Sorter{
 
     private static boolean swapped;
 
-    public BubbleSorter() {
-    }
-
-    public static int[] bubbleSortArray(int[] arr){
-        bubbleSortVoid(arr);
+    public int[] sortArray(int[] arr){
+        sortArrayVoid(arr);
         return arr;
     }
 
-    public static void bubbleSortVoid(int[] arr){
+    public void sortArrayVoid(int[] arr){
         do {
             swapped = false;
             for (int i = 1; i < arr.length; i++){

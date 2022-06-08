@@ -145,7 +145,8 @@ public class BinaryTree implements BinaryTreeInterface {
     public int[] getSortedTreeAsc() {
         sortedElements = new int[0];
         getSortedTree(rootNode);
-        BubbleSorter.bubbleSortVoid(sortedElements);
+        BubbleSorter bubbleSorter = new BubbleSorter();
+        bubbleSorter.sortArrayVoid(sortedElements);
         return sortedElements;
     }
 
@@ -167,7 +168,8 @@ public class BinaryTree implements BinaryTreeInterface {
     public int[] getSortedTreeDesc() {
         sortedElements = new int[0];
         getSortedTree(rootNode);
-        BubbleSorter.bubbleSortVoid(sortedElements);
+        BubbleSorter bubbleSorter = new BubbleSorter();
+        bubbleSorter.sortArrayVoid(sortedElements);
         ArrayUtils.reverse(sortedElements);
         return sortedElements;
     }
