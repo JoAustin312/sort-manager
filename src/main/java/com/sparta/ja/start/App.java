@@ -1,8 +1,6 @@
-package com.sparta.ja.control;
+package com.sparta.ja.start;
 
-import com.sparta.ja.binarytree.BinaryTree;
-import com.sparta.ja.exceptions.ChildNotFoundException;
-import com.sparta.ja.exceptions.NodeNotFoundException;
+import com.sparta.ja.sorters.binarytree.BinaryTree;
 import com.sparta.ja.sorters.MergeSorter;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.sparta.ja.binarytree;
+package com.sparta.ja.sorters.binarytree;
 
 import com.sparta.ja.exceptions.ChildNotFoundException;
 import com.sparta.ja.exceptions.NodeNotFoundException;
@@ -7,9 +7,6 @@ import com.sparta.ja.sorters.BubbleSorter;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
