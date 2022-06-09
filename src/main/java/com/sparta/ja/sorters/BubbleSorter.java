@@ -3,9 +3,13 @@ package com.sparta.ja.sorters;
 public class BubbleSorter implements Sorter{
 
     private static boolean swapped;
+    private long start = 0;
+    private long stop = 0;
 
     public int[] sortArray(int[] arr){
+        start = System.nanoTime();
         sortArrayVoid(arr);
+        stop = System.nanoTime();
         return arr;
     }
 
@@ -22,4 +26,10 @@ public class BubbleSorter implements Sorter{
             }
         } while (swapped);
     }
+
+    @Override
+    public long getTimeToSort() {
+        return start - stop;
+    }
+
 }

@@ -2,6 +2,9 @@ package com.sparta.ja.sorters;
 
 public class MergeSorter implements Sorter{
 
+    private long start = 0;
+    private long stop = 0;
+
     @Override
     public void sortArrayVoid(int[] arr) {
         int length = arr.length;
@@ -10,8 +13,9 @@ public class MergeSorter implements Sorter{
 
     @Override
     public int[] sortArray(int[] arr) {
-        int length = arr.length;
-        mergeSort(arr, length);
+        start = System.nanoTime();
+        sortArrayVoid(arr);
+        stop = System.nanoTime();
         return arr;
     }
 
@@ -55,7 +59,7 @@ public class MergeSorter implements Sorter{
         }
     }
 
-    public static int[] mergeSortedArrays(int[] leftArray, int[] rightArray){ //previous implementation of merge updated to use new method
+    public static int[] mergeSortedArrays(int[] leftArray, int[] rightArray){ //previous implementation of mergeArrays updated to use new method
         if (isSorted(leftArray) && isSorted(rightArray)){
             int leftLength = leftArray.length;
             int rightLength = rightArray.length;
@@ -80,5 +84,9 @@ public class MergeSorter implements Sorter{
         return true;
     }
 
+    @Override
+    public long getTimeToSort() {
+        return start - stop;
+    }
 
 }
