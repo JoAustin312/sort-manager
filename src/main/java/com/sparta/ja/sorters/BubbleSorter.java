@@ -29,7 +29,7 @@ public class BubbleSorter implements Sorter{
 
     @Override
     public long getTimeToSort() {
-        return start - stop;
+        return stop - start;
     }
 
 }

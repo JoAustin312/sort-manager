@@ -6,11 +6,13 @@ import com.sparta.ja.sorters.Sorter;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class SortLoader {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static Random r = new Random();
+    private static Logger logger = Logger.getLogger("Sort Loader Logger");
 
     public static void start(){
 
@@ -27,7 +29,7 @@ public class SortLoader {
                 int[] arrayToSort = generateRandomArray(arraySize);
                 DisplayManager.printResult(sorter, arrayToSort);
             } catch (SorterNotFoundException e) {
-                throw new RuntimeException(e);
+                System.out.println(e.getMessage());
             }
             System.out.println("\nEnter any number except 0 to continue (0 will exit the program)");
             cont = scanner.nextInt();

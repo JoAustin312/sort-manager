@@ -17,14 +17,14 @@ public class App
 //        tree.addElement(3);
 //        tree.addElement(64);
 //        tree.addElement(112);
-//
+
 //        System.out.println(tree.findElement(89));
 //        System.out.println(tree.getNumberOfElements());
-//
+
 //        int[] elementsToAdd = {4,56,35,71,95};
 //        tree.addElements(elementsToAdd);
 //        System.out.println(tree.getNumberOfElements());
-//
+
 //        try {
 //            System.out.println(tree.getRightChild(25));
 //            System.out.println(tree.getRightChild(64));
@@ -42,7 +42,7 @@ public class App
 //        } catch (ChildNotFoundException e) {
 //            throw new RuntimeException(e);
 //        }
-//
+
 //        System.out.println(Arrays.toString(tree.getSortedTreeAsc()));
 //        System.out.println(Arrays.toString(tree.getSortedTreeDesc()));
 //
