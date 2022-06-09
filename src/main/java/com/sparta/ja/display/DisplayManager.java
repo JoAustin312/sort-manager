@@ -10,8 +10,8 @@ public class DisplayManager {
         System.out.println("Please choose a sorter by entering the corresponding value below: \n" +
                 "1: Bubble Sort\n" +
                 "2: Merge Sort\n" +
-                "3: Insertion Sort" +
-                "4: ");
+                "3: Insertion Sort\n" +
+                "4: Tree Sort");
     }
 
     public static void printChooseArraySize(){
