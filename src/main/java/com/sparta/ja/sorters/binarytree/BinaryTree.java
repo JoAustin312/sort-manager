@@ -2,13 +2,8 @@ package com.sparta.ja.sorters.binarytree;
 
 import com.sparta.ja.exceptions.ChildNotFoundException;
 import com.sparta.ja.exceptions.NodeNotFoundException;
-import com.sparta.ja.logging.CustomFormatter;
-import com.sparta.ja.sorters.BubbleSorter;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,14 +15,14 @@ public class BinaryTree implements BinaryTreeInterface {
 
     public BinaryTree(final int element) {
         rootNode = new Node(element);
-        try {
-            Handler fileHandler = new FileHandler("src/main/java/com/sparta/ja/binarytree/BTlogs.logs", true);
-            logger.addHandler(fileHandler);
-            //logger.setFilter(new CustomFilter());
-            fileHandler.setFormatter(new CustomFormatter());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    }
+    public BinaryTree(int[] arr) {
+        rootNode = new Node(arr[0]);
+        addMultipleNodesToTree(rootNode, arr);
+    }
+    public BinaryTree(final int element, int[] arr) {
+        rootNode = new Node(element);
+        addMultipleNodesToTree(rootNode,arr);
     }
 
     @Override
@@ -141,22 +136,20 @@ public class BinaryTree implements BinaryTreeInterface {
     @Override
     public int[] getSortedTreeAsc() {
         sortedElements = new int[0];
-        getSortedTree(rootNode);
-        BubbleSorter bubbleSorter = new BubbleSorter();
-        bubbleSorter.sortArrayVoid(sortedElements);
+        getSortedTreeAsc(rootNode);
         return sortedElements;
     }
 
-    private int[] getSortedTree(Node node) {
+    private int[] getSortedTreeAsc(Node node) {
         if (node == null){
             return new int[0];
         }
         if (node.hasLeftChild()){
-            getSortedTree(node.getLeftChild());
+            getSortedTreeAsc(node.getLeftChild());
         }
         sortedElements = appendToArray(sortedElements, node.getValue());
         if (node.hasRightChild()) {
-            getSortedTree(node.getRightChild());
+            getSortedTreeAsc(node.getRightChild());
         }
         return sortedElements;
     }
@@ -164,10 +157,21 @@ public class BinaryTree implements BinaryTreeInterface {
     @Override
     public int[] getSortedTreeDesc() {
         sortedElements = new int[0];
-        getSortedTree(rootNode);
-        BubbleSorter bubbleSorter = new BubbleSorter();
-        bubbleSorter.sortArrayVoid(sortedElements);
-        ArrayUtils.reverse(sortedElements);
+        getSortedTreeDesc(rootNode);
+        return sortedElements;
+    }
+
+    private int[] getSortedTreeDesc(Node node) {
+        if (node == null){
+            return new int[0];
+        }
+        if (node.hasRightChild()) {
+            getSortedTreeDesc(node.getRightChild());
+        }
+        sortedElements = appendToArray(sortedElements, node.getValue());
+        if (node.hasLeftChild()){
+            getSortedTreeDesc(node.getLeftChild());
+        }
         return sortedElements;
     }
 

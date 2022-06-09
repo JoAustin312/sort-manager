@@ -36,6 +36,6 @@ public class InsertionSorter implements Sorter{
 
     @Override
     public long getTimeToSort() {
-        return start - stop;
+        return stop - start;
     }
 }
