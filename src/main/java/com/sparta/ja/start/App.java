@@ -9,22 +9,22 @@ public class App
 {
     public static void main( String[] args )
     {
-        BinaryTree tree = new BinaryTree(20);
-        tree.addElement(25);
-        tree.addElement(11);
-        tree.addElement(89);
-        tree.addElement(47);
-        tree.addElement(3);
-        tree.addElement(64);
-        tree.addElement(112);
-
-        //System.out.println(tree.findElement(89));
-        //System.out.println(tree.getNumberOfElements());
-
-        int[] elementsToAdd = {4,56,35,71,95};
-        tree.addElements(elementsToAdd);
-        //System.out.println(tree.getNumberOfElements());
-
+//        BinaryTree tree = new BinaryTree(20);
+//        tree.addElement(25);
+//        tree.addElement(11);
+//        tree.addElement(89);
+//        tree.addElement(47);
+//        tree.addElement(3);
+//        tree.addElement(64);
+//        tree.addElement(112);
+//
+//        System.out.println(tree.findElement(89));
+//        System.out.println(tree.getNumberOfElements());
+//
+//        int[] elementsToAdd = {4,56,35,71,95};
+//        tree.addElements(elementsToAdd);
+//        System.out.println(tree.getNumberOfElements());
+//
 //        try {
 //            System.out.println(tree.getRightChild(25));
 //            System.out.println(tree.getRightChild(64));
@@ -42,12 +42,13 @@ public class App
 //        } catch (ChildNotFoundException e) {
 //            throw new RuntimeException(e);
 //        }
-
-        System.out.println(Arrays.toString(tree.getSortedTreeAsc()));
-        System.out.println(Arrays.toString(tree.getSortedTreeDesc()));
-
-        int[] arrayToSort = {4,56,35,71,95,31,78,62,6,90,120,104,1};
-        MergeSorter mergeSorter = new MergeSorter();
-        System.out.println(Arrays.toString(mergeSorter.sortArray(arrayToSort)));
+//
+//        System.out.println(Arrays.toString(tree.getSortedTreeAsc()));
+//        System.out.println(Arrays.toString(tree.getSortedTreeDesc()));
+//
+//        int[] arrayToSort = {4,56,35,71,95,31,78,62,6,90,120,104,1};
+//        MergeSorter mergeSorter = new MergeSorter();
+//        System.out.println(Arrays.toString(mergeSorter.sortArray(arrayToSort)));
+        SortLoader.start();
     }
 }
