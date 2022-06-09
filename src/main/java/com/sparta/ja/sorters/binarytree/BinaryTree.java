@@ -1,4 +1,4 @@
-package com.sparta.ja.binarytree;
+package com.sparta.ja.sorters.binarytree;
 
 import com.sparta.ja.exceptions.ChildNotFoundException;
 import com.sparta.ja.exceptions.NodeNotFoundException;
@@ -7,9 +7,6 @@ import com.sparta.ja.sorters.BubbleSorter;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -145,7 +142,8 @@ public class BinaryTree implements BinaryTreeInterface {
     public int[] getSortedTreeAsc() {
         sortedElements = new int[0];
         getSortedTree(rootNode);
-        BubbleSorter.bubbleSortVoid(sortedElements);
+        BubbleSorter bubbleSorter = new BubbleSorter();
+        bubbleSorter.sortArrayVoid(sortedElements);
         return sortedElements;
     }
 
@@ -167,7 +165,8 @@ public class BinaryTree implements BinaryTreeInterface {
     public int[] getSortedTreeDesc() {
         sortedElements = new int[0];
         getSortedTree(rootNode);
-        BubbleSorter.bubbleSortVoid(sortedElements);
+        BubbleSorter bubbleSorter = new BubbleSorter();
+        bubbleSorter.sortArrayVoid(sortedElements);
         ArrayUtils.reverse(sortedElements);
         return sortedElements;
     }

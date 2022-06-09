@@ -1,6 +1,7 @@
 package com.sparta.ja.sorters;
 
-public abstract class Sorter {
+public interface Sorter {
 
-
+    void sortArrayVoid(int[] arr);
+    int[] sortArray(int[]arr);
 }

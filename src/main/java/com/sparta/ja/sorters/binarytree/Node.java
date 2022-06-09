@@ -1,4 +1,4 @@
-package com.sparta.ja.binarytree;
+package com.sparta.ja.sorters.binarytree;
 
 public class Node {
     private final int value;

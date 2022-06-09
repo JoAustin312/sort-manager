@@ -1,38 +1,74 @@
 package com.sparta.ja.sorters;
 
-public class MergeSorter {
+public class MergeSorter implements Sorter{
 
-    public static int[] mergeArrays(int[] firstArray, int[] secondArray){
-        if (isSorted(firstArray) && isSorted(secondArray)){
-            int firstArrayLength = firstArray.length;
-            int secondArrayLength = secondArray.length;
-            int firstArrayPointer = 0;
-            int secondArrayPointer = 0;
-            int mergedArrayPointer = 0;
+    @Override
+    public void sortArrayVoid(int[] arr) {
+        int length = arr.length;
+        mergeSort(arr, length);
+    }
 
-            int[] mergedArray = new int[firstArrayLength + secondArrayLength];
+    @Override
+    public int[] sortArray(int[] arr) {
+        int length = arr.length;
+        mergeSort(arr, length);
+        return arr;
+    }
 
+    public void mergeSort(int[] arr, int arrLength) {
+        if (arrLength < 2) {
+            return;
+        }
+        int middle = arrLength / 2;
+        int[] left = new int[middle];
+        int[] right = new int[arrLength - middle];
 
-            while (firstArrayPointer < firstArrayLength && secondArrayPointer < secondArrayLength){ //merge arrays while arrays both have values
-                if (firstArray[firstArrayPointer] < secondArray[secondArrayPointer]){
-                    mergedArray[mergedArrayPointer++] = firstArray[firstArrayPointer++];
-                } else {
-                    mergedArray[mergedArrayPointer++] = secondArray[secondArrayPointer++];
-                }
+        System.arraycopy(arr, 0, left, 0, middle);
+
+        if (arrLength - middle >= 0) {
+            System.arraycopy(arr, middle, right, 0, arrLength - middle);
+        }
+
+        mergeSort(left, middle);
+        mergeSort(right, arrLength - middle);
+        merge(arr, left, right, middle, arrLength - middle);
+    }
+
+    public static void merge(int[] arr, int[] leftArray, int[] rightArray, int leftLength, int rightLength) {
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (i < leftLength && j < rightLength) {
+            if (leftArray[i] <= rightArray[j]) {
+                arr[k++] = leftArray[i++];
             }
-
-            while (firstArrayPointer < firstArrayLength){ //adds remaining values to array if firstArray is longer
-                mergedArray[mergedArrayPointer++] = firstArray[firstArrayPointer++];
+            else {
+                arr[k++] = rightArray[j++];
             }
+        }
+        while (i < leftLength) {
+            arr[k++] = leftArray[i++];
+        }
+        while (j < rightLength) {
+            arr[k++] = rightArray[j++];
+        }
+    }
 
-            while (secondArrayPointer < secondArrayLength){ //adds remaining values to array if secondArray is longer
-                mergedArray[mergedArrayPointer++] = secondArray[secondArrayPointer++];
-            }
+    public static int[] mergeSortedArrays(int[] leftArray, int[] rightArray){ //previous implementation of merge updated to use new method
+        if (isSorted(leftArray) && isSorted(rightArray)){
+            int leftLength = leftArray.length;
+            int rightLength = rightArray.length;
+            int[] mergedArray = new int[leftLength + rightLength];
+
+            merge(mergedArray, leftArray, rightArray, leftLength, rightLength);
+
             return mergedArray;
         } else {
-            BubbleSorter.bubbleSortVoid(firstArray); //sort arrays if given unsorted and calls method recursively
-            BubbleSorter.bubbleSortVoid(secondArray);
-            return mergeArrays(firstArray, secondArray);
+            BubbleSorter bubbleSorter = new BubbleSorter();
+            bubbleSorter.sortArrayVoid(leftArray); //sort arrays if given unsorted and calls method recursively
+            bubbleSorter.sortArrayVoid(rightArray);
+            return mergeSortedArrays(leftArray, rightArray);
         }
     }
 
@@ -43,4 +79,6 @@ public class MergeSorter {
         }
         return true;
     }
+
+
 }

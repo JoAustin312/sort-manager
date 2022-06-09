@@ -1,4 +1,4 @@
-package com.sparta.ja.binarytree;
+package com.sparta.ja.sorters.binarytree;
 
 import com.sparta.ja.exceptions.ChildNotFoundException;
 import com.sparta.ja.exceptions.NodeNotFoundException;

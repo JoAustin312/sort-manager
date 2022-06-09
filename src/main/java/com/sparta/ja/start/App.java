@@ -1,8 +1,7 @@
-package com.sparta.ja.control;
+package com.sparta.ja.start;
 
-import com.sparta.ja.binarytree.BinaryTree;
-import com.sparta.ja.exceptions.ChildNotFoundException;
-import com.sparta.ja.exceptions.NodeNotFoundException;
+import com.sparta.ja.sorters.binarytree.BinaryTree;
+import com.sparta.ja.sorters.MergeSorter;
 
 import java.util.Arrays;
 
@@ -46,5 +45,9 @@ public class App
 
         System.out.println(Arrays.toString(tree.getSortedTreeAsc()));
         System.out.println(Arrays.toString(tree.getSortedTreeDesc()));
+
+        int[] arrayToSort = {4,56,35,71,95,31,78,62,6,90,120,104,1};
+        MergeSorter mergeSorter = new MergeSorter();
+        System.out.println(Arrays.toString(mergeSorter.sortArray(arrayToSort)));
     }
 }
