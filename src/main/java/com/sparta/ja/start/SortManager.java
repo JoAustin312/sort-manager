@@ -1,10 +1,7 @@
 package com.sparta.ja.start;
 
 import com.sparta.ja.exceptions.SorterNotFoundException;
-import com.sparta.ja.sorters.BubbleSorter;
-import com.sparta.ja.sorters.InsertionSorter;
-import com.sparta.ja.sorters.MergeSorter;
-import com.sparta.ja.sorters.Sorter;
+import com.sparta.ja.sorters.*;
 
 public class SortManager {
 
@@ -16,6 +13,8 @@ public class SortManager {
                 return new MergeSorter();
             case 3:
                 return new InsertionSorter();
+            case 4:
+                return new TreeSorter();
             default:
                 throw new SorterNotFoundException("Sorter not found");
         }
