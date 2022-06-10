@@ -2,31 +2,38 @@ package com.sparta.ja.sorters.binarytree;
 
 import com.sparta.ja.exceptions.ChildNotFoundException;
 import com.sparta.ja.exceptions.NodeNotFoundException;
-import org.apache.commons.lang3.ArrayUtils;
+import com.sparta.ja.logging.MyLogger;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BinaryTree implements BinaryTreeInterface {
 
     private final Node rootNode;
-    private static Logger logger = Logger.getLogger("my logger");
     private int[] sortedElements;
+    private static Logger logger = MyLogger.getLogger();
+    private static long stop = 0;
+    private static long start = 0;
 
     public BinaryTree(final int element) {
+        logger.log(Level.INFO, "Creating binary tree with only root node");
         rootNode = new Node(element);
     }
     public BinaryTree(int[] arr) {
+        logger.log(Level.INFO, "Creating binary tree with with given array: " + Arrays.toString(arr));
         rootNode = new Node(arr[0]);
         addMultipleNodesToTree(rootNode, arr);
     }
     public BinaryTree(final int element, int[] arr) {
+        logger.log(Level.INFO, "Creating binary tree with with given array: " + Arrays.toString(arr) + " and given root node: " + element);
         rootNode = new Node(element);
         addMultipleNodesToTree(rootNode,arr);
     }
 
     @Override
     public void addElement(final int element) {
+        logger.log(Level.INFO, "Adding element \"" + element +"\" to tree");
         addNodeToTree(rootNode, element);
     }
 
@@ -50,6 +57,7 @@ public class BinaryTree implements BinaryTreeInterface {
 
     @Override
     public boolean findElement(final int element) {
+        logger.log(Level.INFO, "Finding element \"" + element +"\" in tree");
         Node node = findNode(element);
         return node != null;
     }
@@ -72,11 +80,13 @@ public class BinaryTree implements BinaryTreeInterface {
 
     @Override
     public int getRootElement() {
+        logger.log(Level.INFO, "Getting current root node in tree");
         return rootNode.getValue();
     }
 
     @Override
     public int getNumberOfElements() {
+        logger.log(Level.INFO, "Getting number of elements in tree");
         return countNodes(rootNode);
     }
 
@@ -105,8 +115,14 @@ public class BinaryTree implements BinaryTreeInterface {
             if (node.hasLeftChild()) {
                 Node leftChild = getLeftChild(node);
                 return leftChild.getValue();
-            } else throw new ChildNotFoundException("Child not found");
-        } else throw new NodeNotFoundException("Node not found");
+            } else {
+                logger.log(Level.INFO, "ChildNotFoundException thrown");
+                throw new ChildNotFoundException("Child not found");
+            }
+        } else {
+            logger.log(Level.INFO, "NodeNotFoundException thrown");
+            throw new NodeNotFoundException("Node not found");
+        }
     }
 
     private Node getLeftChild(Node node){
@@ -122,8 +138,14 @@ public class BinaryTree implements BinaryTreeInterface {
             if (node.hasRightChild()) {
                 Node rightChild = getRightChild(node);
                 return rightChild.getValue();
-            } else throw new ChildNotFoundException("Child not found");
-        } else throw new NodeNotFoundException("Node not found");
+            } else {
+                logger.log(Level.INFO, "ChildNotFoundException thrown");
+                throw new ChildNotFoundException("Child not found");
+            }
+        } else {
+            logger.log(Level.INFO, "NodeNotFoundException thrown");
+            throw new NodeNotFoundException("Node not found");
+        }
     }
 
     private Node getRightChild(Node node) {
@@ -135,13 +157,15 @@ public class BinaryTree implements BinaryTreeInterface {
     @Override
     public int[] getSortedTreeAsc() {
         sortedElements = new int[0];
+        start = System.nanoTime();
         getSortedTreeAsc(rootNode);
+        stop = System.nanoTime();
         return sortedElements;
     }
 
-    private int[] getSortedTreeAsc(Node node) {
+    private void getSortedTreeAsc(Node node) {
         if (node == null){
-            return new int[0];
+            return;
         }
         if (node.hasLeftChild()){
             getSortedTreeAsc(node.getLeftChild());
@@ -150,19 +174,20 @@ public class BinaryTree implements BinaryTreeInterface {
         if (node.hasRightChild()) {
             getSortedTreeAsc(node.getRightChild());
         }
-        return sortedElements;
     }
 
     @Override
     public int[] getSortedTreeDesc() {
         sortedElements = new int[0];
+        start = System.nanoTime();
         getSortedTreeDesc(rootNode);
+        stop = System.nanoTime();
         return sortedElements;
     }
 
-    private int[] getSortedTreeDesc(Node node) {
+    private void getSortedTreeDesc(Node node) {
         if (node == null){
-            return new int[0];
+            return;
         }
         if (node.hasRightChild()) {
             getSortedTreeDesc(node.getRightChild());
@@ -171,7 +196,6 @@ public class BinaryTree implements BinaryTreeInterface {
         if (node.hasLeftChild()){
             getSortedTreeDesc(node.getLeftChild());
         }
-        return sortedElements;
     }
 
     private int[] appendToArray(int[] arr, int numToAppend){
@@ -179,6 +203,11 @@ public class BinaryTree implements BinaryTreeInterface {
         System.arraycopy(arr, 0, result, 0, arr.length);
         result[result.length - 1] = numToAppend;
         return result;
+    }
+
+    public static long getTimeToSort() {
+        logger.log(Level.INFO, "Calculating time to sort using TreeSort");
+        return stop - start;
     }
 
 
