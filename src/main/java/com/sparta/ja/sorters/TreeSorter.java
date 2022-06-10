@@ -38,7 +38,6 @@ public class TreeSorter implements Sorter{
 
     @Override
     public long getTimeToSort() {
-        logger.log(Level.INFO, "Calculating time to sort using TreeSort");
         return BinaryTree.getTimeToSort();
     }
 }
