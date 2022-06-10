@@ -13,9 +13,11 @@ public class MergeSorter implements Sorter{
 
     @Override
     public int[] sortArray(int[] arr) {
-        start = System.nanoTime();
-        sortArrayVoid(arr);
-        stop = System.nanoTime();
+        if (arr.length > 1) {
+            start = System.nanoTime();
+            sortArrayVoid(arr);
+            stop = System.nanoTime();
+        }
         return arr;
     }
 

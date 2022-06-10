@@ -7,9 +7,12 @@ public class BubbleSorter implements Sorter{
     private long stop = 0;
 
     public int[] sortArray(int[] arr){
-        start = System.nanoTime();
-        sortArrayVoid(arr);
-        stop = System.nanoTime();
+        if (arr.length > 1) {
+            start = System.nanoTime();
+            sortArrayVoid(arr);
+            stop = System.nanoTime();
+            return arr;
+        }
         return arr;
     }
 

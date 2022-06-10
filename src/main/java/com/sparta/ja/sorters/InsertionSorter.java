@@ -13,9 +13,12 @@ public class InsertionSorter implements Sorter{
     @Override
     public int[] sortArray(int[] arr) {
         int length = arr.length;
-        start = System.nanoTime();
-        insertionSort(arr, length);
-        stop = System.nanoTime();
+        if (length > 1) {
+            start = System.nanoTime();
+            insertionSort(arr, length);
+            stop = System.nanoTime();
+            return arr;
+        }
         return arr;
     }
 

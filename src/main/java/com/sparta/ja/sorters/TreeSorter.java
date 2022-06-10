@@ -14,11 +14,14 @@ public class TreeSorter implements Sorter{
 
     @Override
     public int[] sortArray(int[] arr) {
-        BinaryTree tree = new BinaryTree(arr);
-        start = System.nanoTime();
-        int[] sortedArray = tree.getSortedTreeAsc();
-        stop = System.nanoTime();
-        return sortedArray;
+        if (arr.length > 1) {
+            BinaryTree tree = new BinaryTree(arr);
+            start = System.nanoTime();
+            int[] sortedArray = tree.getSortedTreeAsc();
+            stop = System.nanoTime();
+            return sortedArray;
+        }
+        return arr;
     }
 
     @Override

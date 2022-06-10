@@ -77,7 +77,6 @@ public class BinaryTree implements BinaryTreeInterface {
 
     @Override
     public int getNumberOfElements() {
-        logger.log(Level.INFO, "countNodes result " + countNodes(rootNode));
         return countNodes(rootNode);
     }
 
@@ -94,8 +93,8 @@ public class BinaryTree implements BinaryTreeInterface {
     }
 
     private void addMultipleNodesToTree(Node node, int[] elementsArray){
-        for (int element : elementsArray){
-            addNodeToTree(node, element);
+        for (int i = 1; i < elementsArray.length; i++){
+            addNodeToTree(node, elementsArray[i]);
         }
     }
 
@@ -181,4 +180,6 @@ public class BinaryTree implements BinaryTreeInterface {
         result[result.length - 1] = numToAppend;
         return result;
     }
+
+
 }
